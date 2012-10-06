@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'graph_sv' target in the 'graph_sv' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
