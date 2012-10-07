@@ -63,6 +63,7 @@
             [Ar addObject:str];
             if(delta<k) delta=k;
         }
+        
         if(strcmp(S,"первый")==0)
         {
             delta=100/delta;
@@ -72,6 +73,7 @@
                 if (i==0) CGContextMoveToPoint(context, f, (delta*[[Ar objectAtIndex:i] floatValue]+150.0f));
                 CGContextAddLineToPoint(context,f+=shift,(delta*[[Ar objectAtIndex:i] floatValue]+150.0f));
             }
+            CGContextMoveToPoint(context, f, 150.0f);
             CGContextAddLineToPoint(context,50,150);
         }
     };
@@ -89,20 +91,19 @@
     void (^doSv)(NSMutableArray*, NSMutableArray*, NSMutableArray*)=^(NSMutableArray *AA, NSMutableArray *AB, NSMutableArray *AR)
     {
         float f=50.0;
-        //CGContextMoveToPoint(context, f, 15.0f);
         float buf=0;
         float shift=300/(float)([AA count]);
+        
         for (int z=0; z<[AA count]; z++)
         {
-            
             for (int x=0; x<=z; x++)
             {
                 buf+=[[AA objectAtIndex: x] floatValue]*[[AB objectAtIndex:(z-x)] floatValue];
             }
-            NSString *s = [NSString stringWithFormat:@"%f",buf];
-            [AR addObject:s];
             
-            buf=0;
+        NSString *s = [NSString stringWithFormat:@"%f",buf];
+        [AR addObject:s];
+        buf=0;
         }
         
         float delta=0.0f;
@@ -119,9 +120,10 @@
             if (i==0) CGContextMoveToPoint(context, f, (delta*[[AR objectAtIndex:i] floatValue]+15.0f));
             CGContextAddLineToPoint(context,f+=shift,(delta*[[AR objectAtIndex:i] floatValue]+15.0f));
         }
-        
+        CGContextMoveToPoint(context, f, 15.0f);
         CGContextAddLineToPoint(context,50,15);
         printf("Результирующий вектор: ");
+        
         for (int k=0; k<[AR count]; ++k)
         {
             printf("%f ",[[AR objectAtIndex:k] floatValue]);
@@ -139,8 +141,6 @@
     doSv(A, B, result);
     
     CGContextStrokePath(context);
-    
 }
-
 
 @end
