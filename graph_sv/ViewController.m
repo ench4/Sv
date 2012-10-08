@@ -12,6 +12,7 @@
  */
 
 #import "ViewController.h"
+#import "TextController.h"
 
 @implementation ViewController
 
@@ -27,6 +28,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
+
     NSMutableArray *A=[[NSMutableArray alloc] init];
     NSMutableArray *B=[[NSMutableArray alloc] init];
     NSMutableArray *result=[[NSMutableArray alloc] init];
@@ -54,6 +56,7 @@
         float k;
         float shift=300.0f/(float)range;
         float delta=0.0f;
+        float value=0.0f;
         printf("Заполните %s вектор\n",S);
         
         for (int i=0; i<range; ++i)
@@ -63,6 +66,8 @@
             [Ar addObject:str];
             if(delta<k) delta=k;
         }
+        
+        value = delta;
         
         if(strcmp(S,"первый")==0)
         {
@@ -75,6 +80,8 @@
             }
             CGContextMoveToPoint(context, f, 150.0f);
             CGContextAddLineToPoint(context,50,150);
+            
+
         }
     };
     
@@ -100,7 +107,7 @@
             {
                 buf+=[[AA objectAtIndex: x] floatValue]*[[AB objectAtIndex:(z-x)] floatValue];
             }
-            
+
         NSString *s = [NSString stringWithFormat:@"%f",buf];
         [AR addObject:s];
         buf=0;
@@ -142,5 +149,4 @@
     
     CGContextStrokePath(context);
 }
-
 @end

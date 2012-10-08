@@ -9,5 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ViewController : NSView
+
 - (void)drawRect:(NSRect)rect;
+
 @end
