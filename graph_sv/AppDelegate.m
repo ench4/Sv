@@ -8,15 +8,27 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "Model.h"
 
 @implementation AppDelegate
 @synthesize text = text_;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     ViewController *a=[[ViewController alloc] initWithFrame:CGRectMake(5, 5, 600, 600)];
-    [a drawRect:CGRectMake(15, 15, 500, 500)];
-    text_.floatValue=99;
-
+    Model *M=[[Model alloc] init];
+    [M fillByRandom:100];
+    [a drawRect:CGRectMake(15, 15, 500, 500):M.A];
+    
+    
+    CALayer *la=[[CALayer alloc] init];
+    CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+    
+    NSTableView *TV=[[NSTableView alloc] initWithFrame:CGRectMake(50, 50, 200, 200)];
+    NSTableColumn *TC=[[NSTableColumn alloc] initWithIdentifier:@"aaa"];
+    NSCell *C=[[NSCell alloc] initTextCell:@"zzzZZ"];
+    [TV addTableColumn:TC];
+    [TV drawCell:C];
+    [TV drawLayer:la inContext:context];
     
 }
 
