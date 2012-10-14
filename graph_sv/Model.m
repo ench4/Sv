@@ -25,12 +25,33 @@
 
 -(void)fillByRandom:(int)range
 {
+    NSMutableArray* t=[[NSMutableArray alloc] init];
     for (int i=0; i<range; ++i)
     {
         NSNumber *a=[[NSNumber alloc] initWithInt:rand()%500];
-        [A addObject:a];
+        [t addObject:a];
+        self.a=t;
     }
+    //self.A=t;
+    
 };
+
+-(void)manualFill
+{
+    int range;
+    NSMutableArray* t=[[NSMutableArray alloc] init];
+    printf("Введите размер вектора: ");
+    scanf("%d",&range);
+    float k;
+    printf("Заполните вектор\n");
+    for (int i=0; i<range; ++i)
+    {
+        scanf("%f",&k);
+        NSNumber* str = [[NSNumber alloc] initWithFloat:k];
+        [t addObject:str];
+    }
+    self.A=t;
+}
 
 -(Model*)doSv:(Model*)M
 {
@@ -38,21 +59,24 @@
     float buf;
 
     NSNumber *zero=[[NSNumber alloc] initWithFloat:0.0f];
-    for (int i=0; i<([A count]); i++)
+    NSMutableArray *wzA=[[NSMutableArray alloc] initWithArray:A];
+    NSMutableArray *wzM=[[NSMutableArray alloc] initWithArray:M.A];
+    
+    for (int i=0; i<([wzM count]); i++)
     {
-        [A addObject:zero];
+        [wzA addObject:zero];
     }
     
-    for (int i=0; i<([M.A count]); i++)
+    for (int i=0; i<([wzA count]); i++)
     {
-        [M.A addObject:zero];
+        [wzM addObject:zero];
     }
     
-    for (int z=0; z<[A count]; z++)
+    for (int z=0; z<[wzA count]; z++)
     {
         for (int x=0; x<=z; x++)
         {
-            buf+=[[A objectAtIndex: x] floatValue]*[[M.A objectAtIndex:(z-x)] floatValue];
+            buf+=[[wzA objectAtIndex: x] floatValue]*[[wzM objectAtIndex:(z-x)] floatValue];
         }
         NSNumber *b=[[NSNumber alloc] initWithFloat:buf];
         [mod.A addObject:b];

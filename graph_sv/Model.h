@@ -15,6 +15,7 @@
 @property NSMutableArray *A;
 -(id)init;
 -(void)fillByRandom:(int)range;
+-(void)manualFill;
 -(Model*)doSv:(Model*)M;
 
 

@@ -124,9 +124,9 @@
 				04DDADFE16200E180044396F /* AppDelegate.m */,
 				043309201622E39E0043B7FE /* Model.h */,
 				043309211622E39E0043B7FE /* Model.m */,
-				04DDAE0016200E180044396F /* MainMenu.xib */,
 				04DDAE1F16200E2F0044396F /* ViewController.h */,
 				04DDAE2016200E2F0044396F /* ViewController.m */,
+				04DDAE0016200E180044396F /* MainMenu.xib */,
 				04DDADF216200E180044396F /* Supporting Files */,
 			);
 			path = graph_sv;

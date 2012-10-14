@@ -10,6 +10,6 @@
 
 @interface ViewController : NSView
 
-- (void)drawRect:(NSRect)rect:(NSArray*)A;
+- (void)draw:(NSRect)rect:(NSArray*)A;
 
 @end

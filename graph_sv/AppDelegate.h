@@ -7,8 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewController.h"
+#import "Model.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+{
+    ViewController *viewA;
+    ViewController *viewB;
+    ViewController *viewC;
+    Model *modelA;
+    Model *modelB;
+}
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *text;

@@ -12,24 +12,50 @@
 
 @implementation AppDelegate
 @synthesize text = text_;
+@synthesize window = window_;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    ViewController *a=[[ViewController alloc] initWithFrame:CGRectMake(5, 5, 600, 600)];
-    Model *M=[[Model alloc] init];
-    [M fillByRandom:100];
-    [a drawRect:CGRectMake(15, 15, 500, 500):M.A];
+    [window_ setFrame:CGRectMake(300, 200, 800, 500) display:YES];
+    [window_ setTitle:@"Свертка"];
     
+    float height=115.0f;
+    float wight=305.0f;
+    NSRect r1=CGRectMake(450, 350, wight, height);
+    NSRect r2=CGRectMake(450, 175, wight, height);
+    NSRect r3=CGRectMake(450, 0, wight, height);
     
-    CALayer *la=[[CALayer alloc] init];
-    CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+    viewA=[[ViewController alloc] initWithFrame:r1];
+    viewB=[[ViewController alloc] initWithFrame:r2];
+    viewC=[[ViewController alloc] initWithFrame:r3];
     
-    NSTableView *TV=[[NSTableView alloc] initWithFrame:CGRectMake(50, 50, 200, 200)];
-    NSTableColumn *TC=[[NSTableColumn alloc] initWithIdentifier:@"aaa"];
-    NSCell *C=[[NSCell alloc] initTextCell:@"zzzZZ"];
-    [TV addTableColumn:TC];
-    [TV drawCell:C];
-    [TV drawLayer:la inContext:context];
+    modelA=[[Model alloc] init];
+    modelB=[[Model alloc] init];
+    //[a fillByRandom:50];
+    //b fillByRandom:20];
+    [modelA manualFill];	
+    [modelB manualFill];
+    [modelA addObserver: self forKeyPath:@"A" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+   // [modelB addObserver: self forKeyPath:@"A" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
     
-}
+    [viewA draw:r1:modelA.A];
+    [viewB draw:r2:modelB.A];
+    [viewC draw:r3:[modelA doSv:modelB].A];
+    
+    int lol;
+    scanf("%i",&lol);
+    [modelA fillByRandom:lol];
 
+
+}
+- (void) observeValueForKeyPath: (NSString *) keyPath ofObject: (id) object change: (NSDictionary *) change context: (void *) context{
+    NSLog(@"gogo");
+    float height=115.0f;
+    float wight=305.0f;
+    NSRect r1=CGRectMake(450, 350, wight, height);
+    NSRect r2=CGRectMake(450, 175, wight, height);
+    NSRect r3=CGRectMake(450, 0, wight, height);
+    [viewA draw:r1:modelA.A];
+    [viewB draw:r2:modelB.A];
+    [viewC draw:r3:[modelA doSv:modelB].A];
+}
 @end
