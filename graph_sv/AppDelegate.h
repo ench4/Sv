@@ -15,11 +15,12 @@
     ViewController *viewA;
     ViewController *viewB;
     ViewController *viewC;
-    Model *modelA;
+    IBOutlet Model *modelA;
     Model *modelB;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *text;
+@property Model *modelA;
 
 @end

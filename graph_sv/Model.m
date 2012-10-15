@@ -11,7 +11,7 @@
 
 @implementation Model
 
-@synthesize A = A;
+@synthesize A;// = A;
 
 -(id)init
 {
@@ -28,11 +28,11 @@
     NSMutableArray* t=[[NSMutableArray alloc] init];
     for (int i=0; i<range; ++i)
     {
-        NSNumber *a=[[NSNumber alloc] initWithInt:rand()%500];
+        NSNumber *a=[[NSNumber alloc] initWithFloat:rand()%500];
         [t addObject:a];
-        self.a=t;
+        //self.a=t;
     }
-    //self.A=t;
+    self.A=t;
     
 };
 

@@ -11,5 +11,4 @@
 @interface ViewController : NSView
 
 - (void)draw:(NSRect)rect:(NSArray*)A;
-
 @end

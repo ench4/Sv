@@ -61,10 +61,4 @@
  
     CGContextStrokePath(context);
 }
-
-
--(void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
-{
-    
-};
 @end
