@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSView
+@interface ViewController : NSView 
 
 - (void)draw:(NSRect)rect:(NSArray*)A;
+
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		043309221622E39E0043B7FE /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 043309211622E39E0043B7FE /* Model.m */; };
+		04A28175162E0E0300B683F6 /* myType.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A28174162E0E0300B683F6 /* myType.m */; };
 		04DDADEC16200E180044396F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDADEB16200E180044396F /* Cocoa.framework */; };
 		04DDADF616200E180044396F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04DDADF416200E180044396F /* InfoPlist.strings */; };
 		04DDADF816200E180044396F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDADF716200E180044396F /* main.m */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		043309201622E39E0043B7FE /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		043309211622E39E0043B7FE /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		04A28173162E0E0300B683F6 /* myType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myType.h; sourceTree = "<group>"; };
+		04A28174162E0E0300B683F6 /* myType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myType.m; sourceTree = "<group>"; };
 		04DDADE716200E180044396F /* graph_sv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = graph_sv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DDADEB16200E180044396F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04DDADEE16200E180044396F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,8 @@
 				04DDADFE16200E180044396F /* AppDelegate.m */,
 				043309201622E39E0043B7FE /* Model.h */,
 				043309211622E39E0043B7FE /* Model.m */,
+				04A28173162E0E0300B683F6 /* myType.h */,
+				04A28174162E0E0300B683F6 /* myType.m */,
 				04DDAE1F16200E2F0044396F /* ViewController.h */,
 				04DDAE2016200E2F0044396F /* ViewController.m */,
 				04DDAE0016200E180044396F /* MainMenu.xib */,
@@ -275,6 +280,7 @@
 				04DDADFF16200E180044396F /* AppDelegate.m in Sources */,
 				04DDAE2116200E2F0044396F /* ViewController.m in Sources */,
 				043309221622E39E0043B7FE /* Model.m in Sources */,
+				04A28175162E0E0300B683F6 /* myType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

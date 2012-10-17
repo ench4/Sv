@@ -13,10 +13,11 @@
     IBOutlet NSMutableArray *A;
 }
 @property (retain) NSMutableArray *A;
+
 -(id)init;
+-(void)setArray:(NSArray*)M;
 -(void)fillByRandom:(int)range;
 -(void)manualFill;
 -(Model*)doSv:(Model*)M;
-
 
 @end

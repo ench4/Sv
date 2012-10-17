@@ -7,7 +7,7 @@
 //
 
 #import "Model.h"
-
+#import "myType.h"
 
 @implementation Model
 
@@ -21,20 +21,26 @@
         A=[[NSMutableArray alloc] init];
     }
     return self;
-};
+}; //init
+ 
+-(void)setArray:(NSArray*)M
+{
+    self.A=[[NSMutableArray alloc] initWithArray:M];
+}; //setArray
 
 -(void)fillByRandom:(int)range
 {
     NSMutableArray* t=[[NSMutableArray alloc] init];
     for (int i=0; i<range; ++i)
     {
-        NSNumber *a=[[NSNumber alloc] initWithFloat:rand()%500];
-        [t addObject:a];
-        //self.a=t;
+        myType *m=[[myType alloc] initWithFloat:rand()%10];
+        [t addObject:m];
+        //self.A=t;
+        
     }
     self.A=t;
     
-};
+}; //fillByRandom
 
 -(void)manualFill
 {
@@ -47,11 +53,11 @@
     for (int i=0; i<range; ++i)
     {
         scanf("%f",&k);
-        NSNumber* str = [[NSNumber alloc] initWithFloat:k];
-        [t addObject:str];
+        myType *m=[[myType alloc] initWithFloat:k];
+        [t addObject:m];
     }
     self.A=t;
-}
+} //manualFill
 
 -(Model*)doSv:(Model*)M
 {
@@ -72,17 +78,17 @@
         [wzM addObject:zero];
     }
     
-    for (int z=0; z<[wzA count]; z++)
+    for (int z=0; z<[wzA count]-1; z++)
     {
         for (int x=0; x<=z; x++)
         {
-            buf+=[[wzA objectAtIndex: x] floatValue]*[[wzM objectAtIndex:(z-x)] floatValue];
+            buf+=[[wzA objectAtIndex:x] floatValue]*[[wzM objectAtIndex:(z-x)] floatValue];
         }
-        NSNumber *b=[[NSNumber alloc] initWithFloat:buf];
-        [mod.A addObject:b];
+        myType *m=[[myType alloc] initWithFloat:buf];
+        [mod.A addObject:m];
         buf=0;
     }
     return mod;
-};
+}; //doSv
 
 @end

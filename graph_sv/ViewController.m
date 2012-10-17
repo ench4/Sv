@@ -60,5 +60,5 @@
     }
  
     CGContextStrokePath(context);
-}
+} //draw
 @end

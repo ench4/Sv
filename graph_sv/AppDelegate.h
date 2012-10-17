@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "Model.h"
 
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
     ViewController *viewA;
@@ -17,6 +18,7 @@
     ViewController *viewC;
     IBOutlet Model *modelA;
     Model *modelB;
+    Model *modelC;
 }
 
 @property (assign) IBOutlet NSWindow *window;
