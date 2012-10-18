@@ -25,13 +25,13 @@
     self=[super init];
     if (self)
     {
-        value=0;
+        value=rand()%100;
     }
     return self;
 }
 -(float)floatValue
 {
-    return 3;//value;
+    return value;
 };
 
 @end

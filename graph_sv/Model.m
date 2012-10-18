@@ -59,18 +59,17 @@
     Model *mod=[[Model alloc] init];
     float buf;
 
-    NSNumber *zero=[[NSNumber alloc] initWithFloat:0.0f];
     NSMutableArray *wzA=[[NSMutableArray alloc] initWithArray:vector];
     NSMutableArray *wzM=[[NSMutableArray alloc] initWithArray:M.vector];
     
     for (int i=0; i<([wzM count]); i++)
     {
-        [wzA addObject:zero];
+        [wzA addObject:@0];
     }
     
     for (int i=0; i<([wzA count]); i++)
     {
-        [wzM addObject:zero];
+        [wzM addObject:@0];
     }
     
     for (int z=0; z<[wzA count]-1; z++)

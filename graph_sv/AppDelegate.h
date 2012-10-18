@@ -25,7 +25,6 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSTextField *text;
 @property Model *modelA;
 
 @end
