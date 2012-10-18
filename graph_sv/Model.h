@@ -10,12 +10,11 @@
 
 @interface Model : NSObject
 {
-    IBOutlet NSMutableArray *A;
+    //IBOutlet NSMutableArray *A;
 }
-@property (retain) NSMutableArray *A;
+@property NSMutableArray *vector;
 
 -(id)init;
--(void)setArray:(NSArray*)M;
 -(void)fillByRandom:(int)range;
 -(void)manualFill;
 -(Model*)doSv:(Model*)M;

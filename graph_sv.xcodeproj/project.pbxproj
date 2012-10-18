@@ -19,7 +19,7 @@
 		04DDAE0B16200E180044396F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDADEB16200E180044396F /* Cocoa.framework */; };
 		04DDAE1316200E180044396F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04DDAE1116200E180044396F /* InfoPlist.strings */; };
 		04DDAE1616200E180044396F /* graph_svTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAE1516200E180044396F /* graph_svTests.m */; };
-		04DDAE2116200E2F0044396F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAE2016200E2F0044396F /* ViewController.m */; };
+		04DDAE2116200E2F0044396F /* SignalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAE2016200E2F0044396F /* SignalView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +56,8 @@
 		04DDAE1216200E180044396F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04DDAE1416200E180044396F /* graph_svTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = graph_svTests.h; sourceTree = "<group>"; };
 		04DDAE1516200E180044396F /* graph_svTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = graph_svTests.m; sourceTree = "<group>"; };
-		04DDAE1F16200E2F0044396F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		04DDAE2016200E2F0044396F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		04DDAE1F16200E2F0044396F /* SignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalView.h; sourceTree = "<group>"; };
+		04DDAE2016200E2F0044396F /* SignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +129,8 @@
 				043309211622E39E0043B7FE /* Model.m */,
 				04A28173162E0E0300B683F6 /* myType.h */,
 				04A28174162E0E0300B683F6 /* myType.m */,
-				04DDAE1F16200E2F0044396F /* ViewController.h */,
-				04DDAE2016200E2F0044396F /* ViewController.m */,
+				04DDAE1F16200E2F0044396F /* SignalView.h */,
+				04DDAE2016200E2F0044396F /* SignalView.m */,
 				04DDAE0016200E180044396F /* MainMenu.xib */,
 				04DDADF216200E180044396F /* Supporting Files */,
 			);
@@ -278,7 +278,7 @@
 			files = (
 				04DDADF816200E180044396F /* main.m in Sources */,
 				04DDADFF16200E180044396F /* AppDelegate.m in Sources */,
-				04DDAE2116200E2F0044396F /* ViewController.m in Sources */,
+				04DDAE2116200E2F0044396F /* SignalView.m in Sources */,
 				043309221622E39E0043B7FE /* Model.m in Sources */,
 				04A28175162E0E0300B683F6 /* myType.m in Sources */,
 			);

@@ -12,10 +12,10 @@
 {
     float value;
 }
-@property float value;
+@property (readwrite) float value;
 
 -(id)initWithFloat:(float)v;
+-(id)init;
 -(float)floatValue;
--(void)setFloatValue:(float)v;
 
 @end 

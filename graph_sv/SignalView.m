@@ -11,10 +11,9 @@
  
  */
 
-#import "ViewController.h"
-#import "TextController.h"
+#import "SignalView.h"
 
-@implementation ViewController
+@implementation SignalView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -25,8 +24,9 @@
     
     return self;
 }
+@synthesize vector;
 
-- (void)draw:(NSRect)rect:(NSArray*) A
+- (void)drawRect:(NSRect)rect//:(NSArray*) A
 {
     CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
     CGContextSetLineWidth(context, 2.0f);
@@ -34,31 +34,34 @@
     CGFloat components[] = {0.0f, 0.0f, 1.0f, 1.0f};
     CGColorRef color = CGColorCreate(colorspace, components);
     CGContextSetStrokeColorWithColor(context, color);
+
     
     NSColor * blue = [NSColor blueColor];
     NSColor * gray = [NSColor lightGrayColor];
     [gray set];
     NSRectFill(rect);
     [blue set];
+
     NSFrameRectWithWidth ( rect, 1 );
     
-    float shift=300.0f/[A count];
+    float shift=(rect.size.width-10)/[vector count];
     float delta=0.0f;
     float f=0.0f;
     
-    for (int i=0; i<[A count]; i++)
+    for (int i=0; i<[vector count]; i++)
     {
-        if (delta < [[A objectAtIndex:i] floatValue]) delta=[[A objectAtIndex:i] floatValue];
+        if (delta < [[vector objectAtIndex:i] floatValue]) delta=[[vector objectAtIndex:i] floatValue];
     }
-    delta=100/delta;
+    delta=(rect.size.height-10)/delta;
             
-    for (int i=0; i<[A count]; i++)
+    for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, rect.origin.x+f, (delta*[[A objectAtIndex:i] floatValue]+rect.origin.y));
-        CGContextAddLineToPoint(context,rect.origin.x+f,(delta*[[A objectAtIndex:i] floatValue]+rect.origin.y));
+        if (i==0) CGContextMoveToPoint(context, rect.origin.x+f, (delta*[[vector objectAtIndex:i] floatValue]+rect.origin.y));
+        CGContextAddLineToPoint(context,rect.origin.x+f,(delta*[[vector objectAtIndex:i] floatValue]+rect.origin.y));
         f+=shift;
     }
- 
+    
     CGContextStrokePath(context);
 } //draw
+
 @end

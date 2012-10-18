@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSView 
+@interface SignalView : NSView
 
-- (void)draw:(NSRect)rect:(NSArray*)A;
+- (void)drawRect:(NSRect)rect;
+@property NSMutableArray* vector;
 
 @end

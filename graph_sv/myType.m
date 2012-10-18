@@ -20,16 +20,18 @@
     }
     return self;
 };
-
+-(id) init
+{
+    self=[super init];
+    if (self)
+    {
+        value=0;
+    }
+    return self;
+}
 -(float)floatValue
 {
-    return value;
+    return 3;//value;
 };
-
--(void)setFloatValue:(float)v
-{
-    value=v;
-}
-
 
 @end

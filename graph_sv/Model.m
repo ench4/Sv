@@ -11,22 +11,17 @@
 
 @implementation Model
 
-@synthesize A;// = A;
+@synthesize vector;
 
 -(id)init
 {
     self=[super init];
     if(self)
     {
-        A=[[NSMutableArray alloc] init];
+        vector=[[NSMutableArray alloc] init];
     }
     return self;
 }; //init
- 
--(void)setArray:(NSArray*)M
-{
-    self.A=[[NSMutableArray alloc] initWithArray:M];
-}; //setArray
 
 -(void)fillByRandom:(int)range
 {
@@ -38,7 +33,7 @@
         //self.A=t;
         
     }
-    self.A=t;
+    self.vector=t;
     
 }; //fillByRandom
 
@@ -56,7 +51,7 @@
         myType *m=[[myType alloc] initWithFloat:k];
         [t addObject:m];
     }
-    self.A=t;
+    self.vector=t;
 } //manualFill
 
 -(Model*)doSv:(Model*)M
@@ -65,8 +60,8 @@
     float buf;
 
     NSNumber *zero=[[NSNumber alloc] initWithFloat:0.0f];
-    NSMutableArray *wzA=[[NSMutableArray alloc] initWithArray:A];
-    NSMutableArray *wzM=[[NSMutableArray alloc] initWithArray:M.A];
+    NSMutableArray *wzA=[[NSMutableArray alloc] initWithArray:vector];
+    NSMutableArray *wzM=[[NSMutableArray alloc] initWithArray:M.vector];
     
     for (int i=0; i<([wzM count]); i++)
     {
@@ -85,7 +80,7 @@
             buf+=[[wzA objectAtIndex:x] floatValue]*[[wzM objectAtIndex:(z-x)] floatValue];
         }
         myType *m=[[myType alloc] initWithFloat:buf];
-        [mod.A addObject:m];
+        [mod.vector addObject:m];
         buf=0;
     }
     return mod;

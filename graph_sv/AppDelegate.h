@@ -7,16 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ViewController.h"
+#import "SignalView.h"
 #import "Model.h"
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    ViewController *viewA;
-    ViewController *viewB;
-    ViewController *viewC;
-    IBOutlet Model *modelA;
+    IBOutlet SignalView *viewA;
+    IBOutlet SignalView *viewB;
+    IBOutlet SignalView *viewC;
+    IBOutlet NSArrayController* controllerA;
+    IBOutlet NSArrayController* controllerB;
+    IBOutlet NSArrayController* controllerC;
+    Model *modelA;
     Model *modelB;
     Model *modelC;
 }
