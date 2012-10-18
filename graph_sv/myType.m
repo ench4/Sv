@@ -33,5 +33,9 @@
 {
     return value;
 };
+- (void) setNilValueForKey:(NSString *)key
+{
+    [self setValue:@0 forKey:key];
+}
 
 @end

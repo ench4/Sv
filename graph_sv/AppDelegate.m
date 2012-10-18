@@ -34,12 +34,16 @@
 
     [modelC setVector:[modelA doSv:modelB].vector];
     
-    [modelA addObserver: self forKeyPath:@"vector" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-    [modelB addObserver: self forKeyPath:@"vector" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
+    [controllerA addObserver:self forKeyPath:@"arrangedObjects.value" options:0 context:nil];
+    [controllerB addObserver:self forKeyPath:@"arrangedObjects.value" options:0 context:nil];
     
     [viewA bind:@"vector" toObject:controllerA withKeyPath:@"arrangedObjects.value" options:nil];
     [viewB bind:@"vector" toObject:controllerB withKeyPath:@"arrangedObjects.value" options:nil];
     [viewC bind:@"vector" toObject:controllerC withKeyPath:@"arrangedObjects.value" options:nil];
+    
+    [controllerA addObserver:viewA forKeyPath:@"arrangedObjects.value" options:0 context:nil];
+    [controllerB addObserver:viewB forKeyPath:@"arrangedObjects.value" options:0 context:nil];
+    [controllerC addObserver:viewC forKeyPath:@"arrangedObjects.value" options:0 context:nil];
 }
 
 - (void) observeValueForKeyPath: (NSString *) keyPath ofObject: (id) object change: (NSDictionary *) change context: (void *) contex

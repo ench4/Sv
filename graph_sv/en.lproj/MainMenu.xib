@@ -1329,7 +1329,7 @@
 											<string key="NSFrameSize">{138, 122}</string>
 											<reference key="NSSuperview" ref="886722063"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="648092944"/>
+											<reference key="NSNextKeyView" ref="754724094"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1499,7 +1499,7 @@
 							<string key="NSFrame">{{20, 332}, {140, 140}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="754724094"/>
+							<reference key="NSNextKeyView" ref="886722063"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSHuggingPriority">{239, 250}</string>
 							<string key="NSAntiCompressionPriority">{750, 750}</string>
@@ -1529,7 +1529,7 @@
 											<string key="NSFrameSize">{138, 122}</string>
 											<reference key="NSSuperview" ref="1043481279"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="353874694"/>
+											<reference key="NSNextKeyView" ref="1025254616"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1656,7 +1656,7 @@
 							<string key="NSFrame">{{20, 184}, {140, 140}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1025254616"/>
+							<reference key="NSNextKeyView" ref="1043481279"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSHuggingPriority">{250, 250}</string>
 							<string key="NSAntiCompressionPriority">{1000, 1000}</string>
@@ -1686,7 +1686,7 @@
 											<string key="NSFrameSize">{138, 122}</string>
 											<reference key="NSSuperview" ref="521958430"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="496355219"/>
+											<reference key="NSNextKeyView" ref="992905883"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1812,7 +1812,7 @@
 							<string key="NSFrame">{{20, 36}, {140, 140}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="992905883"/>
+							<reference key="NSNextKeyView" ref="521958430"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="496355219"/>
@@ -1863,7 +1863,6 @@
 							<string key="NSFrame">{{141, 1}, {82, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="30329171">
@@ -2688,11 +2687,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">remove:</string>
+						<string key="label">add:</string>
 						<reference key="source" ref="99544572"/>
 						<reference key="destination" ref="152193209"/>
 					</object>
-					<int key="connectionID">1870</int>
+					<int key="connectionID">1871</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -4810,7 +4809,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1870</int>
+			<int key="maxID">1871</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

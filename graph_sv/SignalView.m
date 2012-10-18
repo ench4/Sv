@@ -64,4 +64,14 @@
     CGContextStrokePath(context);
 } //draw
 
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self setNeedsDisplay:YES];
+}
+
+- (void) bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
+{
+    [super bind:binding toObject:observable withKeyPath:keyPath options:options];
+    [self setNeedsDisplay:YES];
+}
 @end

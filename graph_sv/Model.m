@@ -37,23 +37,6 @@
     
 }; //fillByRandom
 
--(void)manualFill
-{
-    int range;
-    NSMutableArray* t=[[NSMutableArray alloc] init];
-    printf("Введите размер вектора: ");
-    scanf("%d",&range);
-    float k;
-    printf("Заполните вектор\n");
-    for (int i=0; i<range; ++i)
-    {
-        scanf("%f",&k);
-        myType *m=[[myType alloc] initWithFloat:k];
-        [t addObject:m];
-    }
-    self.vector=t;
-} //manualFill
-
 -(Model*)doSv:(Model*)M
 {
     Model *mod=[[Model alloc] init];
