@@ -18,17 +18,22 @@
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code here.
+        zero=0;
+        bordersShift=15;
     }
-    zero=0;
-    bordersShift=15;
     return self;
 }
 @synthesize vector;
 
-- (void)drawRect:(NSRect)rect//:(NSArray*) A
+- (void)drawRect:(NSRect)rect
 {
+    if ([vector count]<2){
+        return;
+    }
+    
     CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
     CGContextSetLineWidth(context, 2.0f);
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
@@ -55,9 +60,8 @@
             min=[[vector objectAtIndex:i] floatValue];
     }
     
-    float shift_x=(rect.size.width-10)/[vector count];
-    float shift_y=0.0f;
-    shift_y=(rect.size.height-bordersShift*2)/(max+abs(min));
+    float shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
+    float shift_y=(rect.size.height-bordersShift*2)/(max-min);
     
     CGContextMoveToPoint(context, rect.origin.x+bordersShift, rect.origin.y+abs(min*shift_y)+bordersShift);
     CGContextAddLineToPoint(context, rect.size.width-bordersShift, rect.origin.y + abs(min*shift_y)+bordersShift);
@@ -65,8 +69,8 @@
     float currX=bordersShift;
     for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, rect.origin.x+currX, (shift_y*[[vector objectAtIndex:i] floatValue]+rect.origin.y+abs(min*shift_y)+bordersShift));
-        CGContextAddLineToPoint(context,rect.origin.x+currX,(shift_y*[[vector objectAtIndex:i] floatValue]+rect.origin.y+abs(min*shift_y)+bordersShift));
+        if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]+fabs(min))+bordersShift));
+        CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]+fabs(min))+bordersShift));
         currX+=shift_x;
     }
     
