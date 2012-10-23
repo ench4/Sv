@@ -9,6 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface SignalView : NSView
+{
+    float bordersShift;
+    float zero;
+}
 
 - (void)drawRect:(NSRect)rect;
 @property NSMutableArray* vector;

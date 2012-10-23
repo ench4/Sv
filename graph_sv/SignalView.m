@@ -21,7 +21,8 @@
     if (self) {
         // Initialization code here.
     }
-    
+    zero=0;
+    bordersShift=15;
     return self;
 }
 @synthesize vector;
@@ -44,21 +45,29 @@
 
     NSFrameRectWithWidth ( rect, 1 );
     
-    float shift=(rect.size.width-10)/[vector count];
-    float delta=0.0f;
-    float f=0.0f;
-    
+
+    float min=0.0f;
+    float max=0.0f;;
     for (int i=0; i<[vector count]; i++)
     {
-        if (delta < [[vector objectAtIndex:i] floatValue]) delta=[[vector objectAtIndex:i] floatValue];
+        if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
+        if (min > [[vector objectAtIndex:i] floatValue])
+            min=[[vector objectAtIndex:i] floatValue];
     }
-    delta=(rect.size.height-10)/delta;
-            
+    
+    float shift_x=(rect.size.width-10)/[vector count];
+    float shift_y=0.0f;
+    shift_y=(rect.size.height-bordersShift*2)/(max+abs(min));
+    
+    CGContextMoveToPoint(context, rect.origin.x+bordersShift, rect.origin.y+abs(min*shift_y)+bordersShift);
+    CGContextAddLineToPoint(context, rect.size.width-bordersShift, rect.origin.y + abs(min*shift_y)+bordersShift);
+    
+    float currX=bordersShift;
     for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, rect.origin.x+f, (delta*[[vector objectAtIndex:i] floatValue]+rect.origin.y));
-        CGContextAddLineToPoint(context,rect.origin.x+f,(delta*[[vector objectAtIndex:i] floatValue]+rect.origin.y));
-        f+=shift;
+        if (i==0) CGContextMoveToPoint(context, rect.origin.x+currX, (shift_y*[[vector objectAtIndex:i] floatValue]+rect.origin.y+abs(min*shift_y)+bordersShift));
+        CGContextAddLineToPoint(context,rect.origin.x+currX,(shift_y*[[vector objectAtIndex:i] floatValue]+rect.origin.y+abs(min*shift_y)+bordersShift));
+        currX+=shift_x;
     }
     
     CGContextStrokePath(context);
@@ -74,4 +83,12 @@
     [super bind:binding toObject:observable withKeyPath:keyPath options:options];
     [self setNeedsDisplay:YES];
 }
+
+- (void) mouseDragged:(NSEvent *)theEvent
+{
+    //NSLog(@"%f",[theEvent locationInWindow].x);
+    NSRect t=[self frame];
+    NSLog(@"%f",(([theEvent locationInWindow].x-t.origin.x)/t.size.width)* [vector count]);
+}
+
 @end
