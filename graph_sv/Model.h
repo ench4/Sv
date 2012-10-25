@@ -10,7 +10,7 @@
 
 @interface Model : NSObject
 {
-    //IBOutlet NSMutableArray *A;
+    //IBOutlet NSTextField *textField;
 }
 @property NSMutableArray *vector;
 

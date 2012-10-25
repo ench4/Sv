@@ -20,7 +20,6 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        // Initialization code here.
         zero=0;
         bordersShift=15;
     }
@@ -63,8 +62,8 @@
     float shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
     float shift_y=(rect.size.height-bordersShift*2)/(max-min);
     
-    CGContextMoveToPoint(context, rect.origin.x+bordersShift, rect.origin.y+abs(min*shift_y)+bordersShift);
-    CGContextAddLineToPoint(context, rect.size.width-bordersShift, rect.origin.y + abs(min*shift_y)+bordersShift);
+    CGContextMoveToPoint(context, bordersShift, abs(min*shift_y)+bordersShift);
+    CGContextAddLineToPoint(context, rect.size.width-bordersShift, + abs(min*shift_y)+bordersShift);
     
     float currX=bordersShift;
     for (int i=0; i<[vector count]; i++)
@@ -75,7 +74,7 @@
     }
     
     CGContextStrokePath(context);
-} //draw
+} //drawRect
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -91,8 +90,10 @@
 - (void) mouseDragged:(NSEvent *)theEvent
 {
     //NSLog(@"%f",[theEvent locationInWindow].x);
+    
     NSRect t=[self frame];
-    NSLog(@"%f",(([theEvent locationInWindow].x-t.origin.x)/t.size.width)* [vector count]);
+    NSLog(@"%f",(([theEvent locationInWindow].x-t.origin.x-bordersShift)/(t.size.width-2*bordersShift))* ([vector count]-1));
+    
 }
 
 @end

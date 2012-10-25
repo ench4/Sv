@@ -29,7 +29,7 @@
 {
     [window_ setTitle:@"Свертка"];
 
-    [modelA fillByRandom:22];
+    [modelA fillByRandom:10];
     [modelB fillByRandom:10];
 
     [modelC setVector:[modelA doSv:modelB].vector];
