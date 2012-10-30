@@ -22,10 +22,28 @@
     {
         zero=0;
         bordersShift=15;
+        currPoint.x=-15.0f;
+        currPoint.y=-15.0f;
+        min=0.0f;
+        max=0.0f;
+        shift_y=0.0f;
+        shift_x=0.0f;
+        ind=0;
     }
     return self;
 }
 @synthesize vector;
+
+-(void) drawPoint
+{
+    CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+    [[NSColor whiteColor] set];
+    CGRect currRect={currPoint.x-3,currPoint.y-3,6,6};
+
+    NSBezierPath *circle=[NSBezierPath bezierPathWithOvalInRect:currRect];
+    [circle fill];
+    CGContextStrokePath(context);
+}
 
 - (void)drawRect:(NSRect)rect
 {
@@ -40,41 +58,66 @@
     CGColorRef color = CGColorCreate(colorspace, components);
     CGContextSetStrokeColorWithColor(context, color);
 
-    
     NSColor * blue = [NSColor blueColor];
     NSColor * gray = [NSColor lightGrayColor];
     [gray set];
     NSRectFill(rect);
     [blue set];
 
-    NSFrameRectWithWidth ( rect, 1 );
-    
-
-    float min=0.0f;
-    float max=0.0f;;
-    for (int i=0; i<[vector count]; i++)
+    NSFrameRectWithWidth (rect, 1);
+    int m=0;
+    if ([vector[m]floatValue]!=[ vector[m] floatValue]){
+        m=1;
+    }
+    max=[vector[m] floatValue];
+    min=[vector[m] floatValue];
+    for (int i=1; i<[vector count]; i++)
     {
         if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
         if (min > [[vector objectAtIndex:i] floatValue])
             min=[[vector objectAtIndex:i] floatValue];
     }
     
-    float shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
-    float shift_y=(rect.size.height-bordersShift*2)/(max-min);
+    shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
+    shift_y=(rect.size.height-bordersShift*2)/(max-min);
     
-    CGContextMoveToPoint(context, bordersShift, abs(min*shift_y)+bordersShift);
-    CGContextAddLineToPoint(context, rect.size.width-bordersShift, + abs(min*shift_y)+bordersShift);
+    zero=abs(min*shift_y)+bordersShift;
+    CGContextMoveToPoint(context, bordersShift, zero);
+    CGContextAddLineToPoint(context, rect.size.width-bordersShift, zero);
     
     float currX=bordersShift;
+    
     for (int i=0; i<[vector count]; i++)
     {
         if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]+fabs(min))+bordersShift));
         CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]+fabs(min))+bordersShift));
+
         currX+=shift_x;
     }
     
     CGContextStrokePath(context);
+    
+    currX=bordersShift;
+    
+    for (int i=0; i<[vector count]; i++)
+    {
+        currPoint.x=(shift_x*i+bordersShift);
+        currPoint.y=(shift_y*([vector[i] floatValue]+fabs(min))+bordersShift);
+        currX+=shift_x;
+        [self drawPoint];
+    }
+    
 } //drawRect
+
+-(void) mouseDown:(NSEvent *)theEvent
+{
+    NSRect frame=[self frame];
+    ind=(([theEvent locationInWindow].x-frame.origin.x-bordersShift)/(frame.size.width-2*bordersShift))* ([vector count]-1)+0.5;
+    //NSLog(@"%i",ind);
+    //NSLog(@"%f",shift_y*([vector[ind] floatValue]+fabs(min))+bordersShift);
+    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
+    
+}
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -83,17 +126,21 @@
 
 - (void) bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
 {
+    AC=observable;
     [super bind:binding toObject:observable withKeyPath:keyPath options:options];
     [self setNeedsDisplay:YES];
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent
 {
-    //NSLog(@"%f",[theEvent locationInWindow].x);
     
-    NSRect t=[self frame];
-    NSLog(@"%f",(([theEvent locationInWindow].x-t.origin.x-bordersShift)/(t.size.width-2*bordersShift))* ([vector count]-1));
-    
+    NSRect frame=[self frame];
+    currPoint.x=frame.origin.x+(shift_x*ind+bordersShift);
+    NSNumber* val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - frame.origin.y - bordersShift)/shift_y)];
+
+    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
+    [AC setValue:val forKeyPath:@"selection.value"];
+
 }
 
-@end
+@end 

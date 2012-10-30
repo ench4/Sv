@@ -20,6 +20,7 @@
     }
     return self;
 };
+
 -(id) init
 {
     self=[super init];
@@ -29,10 +30,12 @@
     }
     return self;
 }
+
 -(float)floatValue
 {
     return value;
 };
+
 - (void) setNilValueForKey:(NSString *)key
 {
     [self setValue:@0 forKey:key];

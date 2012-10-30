@@ -57,7 +57,7 @@
 		04DDAE1416200E180044396F /* graph_svTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = graph_svTests.h; sourceTree = "<group>"; };
 		04DDAE1516200E180044396F /* graph_svTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = graph_svTests.m; sourceTree = "<group>"; };
 		04DDAE1F16200E2F0044396F /* SignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalView.h; sourceTree = "<group>"; };
-		04DDAE2016200E2F0044396F /* SignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalView.m; sourceTree = "<group>"; };
+		04DDAE2016200E2F0044396F /* SignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalView.m; sourceTree = "<group>"; tabWidth = 3; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
