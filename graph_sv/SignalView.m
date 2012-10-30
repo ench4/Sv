@@ -63,14 +63,11 @@
     [gray set];
     NSRectFill(rect);
     [blue set];
-
+    
     NSFrameRectWithWidth (rect, 1);
-    int m=0;
-    if ([vector[m]floatValue]!=[ vector[m] floatValue]){
-        m=1;
-    }
-    max=[vector[m] floatValue];
-    min=[vector[m] floatValue];
+
+    max=[vector[0] floatValue];
+    min=[vector[0] floatValue];
     for (int i=1; i<[vector count]; i++)
     {
         if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
@@ -81,7 +78,7 @@
     shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
     shift_y=(rect.size.height-bordersShift*2)/(max-min);
     
-    zero=abs(min*shift_y)+bordersShift;
+    zero=-min*shift_y+bordersShift;
     CGContextMoveToPoint(context, bordersShift, zero);
     CGContextAddLineToPoint(context, rect.size.width-bordersShift, zero);
     
@@ -89,8 +86,8 @@
     
     for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]+fabs(min))+bordersShift));
-        CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]+fabs(min))+bordersShift));
+        if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]-min)+bordersShift));
+        CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]-min)+bordersShift));
 
         currX+=shift_x;
     }
@@ -102,7 +99,7 @@
     for (int i=0; i<[vector count]; i++)
     {
         currPoint.x=(shift_x*i+bordersShift);
-        currPoint.y=(shift_y*([vector[i] floatValue]+fabs(min))+bordersShift);
+        currPoint.y=(shift_y*([vector[i] floatValue]-min)+bordersShift);
         currX+=shift_x;
         [self drawPoint];
     }
@@ -113,10 +110,7 @@
 {
     NSRect frame=[self frame];
     ind=(([theEvent locationInWindow].x-frame.origin.x-bordersShift)/(frame.size.width-2*bordersShift))* ([vector count]-1)+0.5;
-    //NSLog(@"%i",ind);
-    //NSLog(@"%f",shift_y*([vector[ind] floatValue]+fabs(min))+bordersShift);
     [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
-    
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -133,10 +127,22 @@
 
 - (void) mouseDragged:(NSEvent *)theEvent
 {
-    
+    NSNumber* val;
     NSRect frame=[self frame];
-    currPoint.x=frame.origin.x+(shift_x*ind+bordersShift);
-    NSNumber* val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - frame.origin.y - bordersShift)/shift_y)];
+    if (frame.origin.y+bordersShift>[theEvent locationInWindow].y)
+    {
+        val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]-10];
+    }else
+    if (frame.origin.y+frame.size.height-bordersShift<[theEvent locationInWindow].y)
+    {
+        val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]+10];
+    }else{
+        ind=(([theEvent locationInWindow].x-frame.origin.x-bordersShift)/(frame.size.width-2*bordersShift))* ([vector count]-1)+0.5;
+        
+        currPoint.x=frame.origin.x+(shift_x*ind+bordersShift);
+        val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - frame.origin.y - zero)/shift_y)];
+    }
+    
 
     [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
     [AC setValue:val forKeyPath:@"selection.value"];

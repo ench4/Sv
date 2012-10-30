@@ -40,7 +40,7 @@
 -(Model*)doSv:(Model*)M
 {
     Model *mod=[[Model alloc] init];
-    float buf;
+    float buf=0;
 
     NSMutableArray *wzA=[[NSMutableArray alloc] initWithArray:vector];
     NSMutableArray *wzM=[[NSMutableArray alloc] initWithArray:M.vector];
@@ -65,7 +65,10 @@
         [mod.vector addObject:m];
         buf=0;
     }
+    for (int i=0; i<[mod.vector count]; i++ )
+    {
+       // NSLog(@"%ld",[mod.vector count]);
+    }
     return mod;
 }; //doSv
-
 @end
