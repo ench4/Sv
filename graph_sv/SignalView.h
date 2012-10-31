@@ -20,6 +20,7 @@
     int ind;
     NSArrayController* AC;
 }
+// ВИТЬКА НУУУБ
 
 - (void) drawRect:(NSRect)rect;
 - (void) drawPoint:(NSPoint)point;
