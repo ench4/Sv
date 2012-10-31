@@ -18,12 +18,14 @@
     float shift_y;
     float shift_x;
     int ind;
+    float diameter;
+    bool boldpoint;
     NSArrayController* AC;
 }
-// ВИТЬКА НУУУБ!!!
 
+- (void) setBoldPoint:(bool) bold;
 - (void) drawRect:(NSRect)rect;
-- (void) drawPoint:(NSPoint)point;
+- (void) drawPoint:(NSPoint)point :(BOOL)Bold;
 - (void) recalcBorder:(NSRect) rect;
 @property NSMutableArray* vector;
 
