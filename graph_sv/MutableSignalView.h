@@ -11,6 +11,7 @@
 @interface MutableSignalView : SignalView
 {
     BOOL needRecalc;
+    BOOL needDrag;
 }
 
 
