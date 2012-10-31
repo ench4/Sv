@@ -22,7 +22,7 @@
     bool boldpoint;
     NSArrayController* AC;
 }
-//1
+
 - (void) setBoldPoint:(bool) bold;
 - (void) drawRect:(NSRect)rect;
 - (void) drawPoint:(NSPoint)point :(BOOL)Bold;
