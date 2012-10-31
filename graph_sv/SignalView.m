@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Samez. All rights reserved.
 //
 /*
- lol
+ 
  2	20	35	49	83	1	18	93	3	19	44	11	53	7	66	6	45	25	5	16	24	38	89	100	77	88	10	19	56	1
  
  */
@@ -22,8 +22,6 @@
     {
         zero=0;
         bordersShift=15;
-        currPoint.x=-15.0f;
-        currPoint.y=-15.0f;
         min=0.0f;
         max=0.0f;
         shift_y=0.0f;
@@ -34,7 +32,7 @@
 }
 @synthesize vector;
 
--(void) drawPoint
+-(void) drawPoint:(NSPoint) currPoint
 {
     CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
     [[NSColor whiteColor] set];
@@ -43,6 +41,23 @@
     NSBezierPath *circle=[NSBezierPath bezierPathWithOvalInRect:currRect];
     [circle fill];
     CGContextStrokePath(context);
+}
+
+- (void)recalcBorder:(NSRect)rect
+{
+    max=[vector[0] floatValue];
+    min=[vector[0] floatValue];
+    for (int i=1; i<[vector count]; i++)
+    {
+        if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
+        if (min > [[vector objectAtIndex:i] floatValue])
+            min=[[vector objectAtIndex:i] floatValue];
+    }
+    
+    shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
+    shift_y=(rect.size.height-bordersShift*2)/(max-min);
+    
+    zero=-min*shift_y+bordersShift;
 }
 
 - (void)drawRect:(NSRect)rect
@@ -65,20 +80,7 @@
     [blue set];
     
     NSFrameRectWithWidth (rect, 1);
-
-    max=[vector[0] floatValue];
-    min=[vector[0] floatValue];
-    for (int i=1; i<[vector count]; i++)
-    {
-        if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
-        if (min > [[vector objectAtIndex:i] floatValue])
-            min=[[vector objectAtIndex:i] floatValue];
-    }
     
-    shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
-    shift_y=(rect.size.height-bordersShift*2)/(max-min);
-    
-    zero=-min*shift_y+bordersShift;
     CGContextMoveToPoint(context, bordersShift, zero);
     CGContextAddLineToPoint(context, rect.size.width-bordersShift, zero);
     
@@ -95,26 +97,24 @@
     CGContextStrokePath(context);
     
     currX=bordersShift;
+    NSPoint point;
     
     for (int i=0; i<[vector count]; i++)
     {
-        currPoint.x=(shift_x*i+bordersShift);
-        currPoint.y=(shift_y*([vector[i] floatValue]-min)+bordersShift);
+        point.x=shift_x*i+bordersShift;
+        point.y=shift_y*([vector[i] floatValue]-min)+bordersShift;
+
         currX+=shift_x;
-        [self drawPoint];
+        [self drawPoint:point];
     }
     
 } //drawRect
 
--(void) mouseDown:(NSEvent *)theEvent
-{
-    NSRect frame=[self frame];
-    ind=(([theEvent locationInWindow].x-frame.origin.x-bordersShift)/(frame.size.width-2*bordersShift))* ([vector count]-1)+0.5;
-    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
-}
+
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    [self recalcBorder:self.frame];
     [self setNeedsDisplay:YES];
 }
 
@@ -122,31 +122,9 @@
 {
     AC=observable;
     [super bind:binding toObject:observable withKeyPath:keyPath options:options];
+    [self recalcBorder:[self frame]];
     [self setNeedsDisplay:YES];
 }
 
-- (void) mouseDragged:(NSEvent *)theEvent
-{
-    NSNumber* val;
-    NSRect frame=[self frame];
-    if (frame.origin.y+bordersShift>[theEvent locationInWindow].y)
-    {
-        val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]-10];
-    }else
-    if (frame.origin.y+frame.size.height-bordersShift<[theEvent locationInWindow].y)
-    {
-        val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]+10];
-    }else{
-        ind=(([theEvent locationInWindow].x-frame.origin.x-bordersShift)/(frame.size.width-2*bordersShift))* ([vector count]-1)+0.5;
-        
-        currPoint.x=frame.origin.x+(shift_x*ind+bordersShift);
-        val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - frame.origin.y - zero)/shift_y)];
-    }
-    
-
-    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
-    [AC setValue:val forKeyPath:@"selection.value"];
-
-}
 
 @end 

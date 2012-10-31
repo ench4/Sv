@@ -13,7 +13,6 @@
 {
     float bordersShift;
     float zero;
-    CGPoint currPoint;
     float min;
     float max;
     float shift_y;
@@ -22,8 +21,9 @@
     NSArrayController* AC;
 }
 
-- (void)drawRect:(NSRect)rect;
--(void) drawPoint;
+- (void) drawRect:(NSRect)rect;
+- (void) drawPoint:(NSPoint)point;
+- (void) recalcBorder:(NSRect) rect;
 @property NSMutableArray* vector;
 
 

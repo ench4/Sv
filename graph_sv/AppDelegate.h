@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SignalView.h"
+#import "MutableSignalView.h"
 #import "Model.h"
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    IBOutlet SignalView *viewA;
-    IBOutlet SignalView *viewB;
+    IBOutlet MutableSignalView *viewA;
+    IBOutlet MutableSignalView *viewB;
     IBOutlet SignalView *viewC;
     IBOutlet NSArrayController* controllerA;
     IBOutlet NSArrayController* controllerB;

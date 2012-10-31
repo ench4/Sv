@@ -20,6 +20,7 @@
 		04DDAE1316200E180044396F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04DDAE1116200E180044396F /* InfoPlist.strings */; };
 		04DDAE1616200E180044396F /* graph_svTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAE1516200E180044396F /* graph_svTests.m */; };
 		04DDAE2116200E2F0044396F /* SignalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAE2016200E2F0044396F /* SignalView.m */; };
+		6CB13294164164E400536DF3 /* MutableSignalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB13293164164E400536DF3 /* MutableSignalView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		04DDAE1516200E180044396F /* graph_svTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = graph_svTests.m; sourceTree = "<group>"; };
 		04DDAE1F16200E2F0044396F /* SignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalView.h; sourceTree = "<group>"; };
 		04DDAE2016200E2F0044396F /* SignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalView.m; sourceTree = "<group>"; tabWidth = 3; };
+		6CB13292164164E400536DF3 /* MutableSignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableSignalView.h; sourceTree = "<group>"; };
+		6CB13293164164E400536DF3 /* MutableSignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableSignalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				04A28174162E0E0300B683F6 /* myType.m */,
 				04DDAE1F16200E2F0044396F /* SignalView.h */,
 				04DDAE2016200E2F0044396F /* SignalView.m */,
+				6CB13292164164E400536DF3 /* MutableSignalView.h */,
+				6CB13293164164E400536DF3 /* MutableSignalView.m */,
 				04DDAE0016200E180044396F /* MainMenu.xib */,
 				04DDADF216200E180044396F /* Supporting Files */,
 			);
@@ -281,6 +286,7 @@
 				04DDAE2116200E2F0044396F /* SignalView.m in Sources */,
 				043309221622E39E0043B7FE /* Model.m in Sources */,
 				04A28175162E0E0300B683F6 /* myType.m in Sources */,
+				6CB13294164164E400536DF3 /* MutableSignalView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
