@@ -74,8 +74,8 @@
     float positionX=([self frame].size.width-2*bordersShift)/([super.vector count]-1)*ind;
     float positionY=(shift_y*([super.vector[ind] floatValue]-min)+bordersShift);
     
-    if (fabs(positionX-([theEvent locationInWindow].x-[self frame].origin.x-bordersShift))<(diameter/2)
-        && fabs(positionY-([theEvent locationInWindow].y-[self frame].origin.y))<(diameter/2))
+    if (fabs(positionX-([theEvent locationInWindow].x-[self frame].origin.x-bordersShift))<(diameter)
+        && fabs(positionY-([theEvent locationInWindow].y-[self frame].origin.y))<(diameter))
             {
                 needDrag=YES;
             }

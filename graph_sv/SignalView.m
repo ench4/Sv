@@ -72,6 +72,7 @@
     shift_y=(rect.size.height-bordersShift*2)/(max-min);
     
     zero=-min*shift_y+bordersShift;
+    
 }
 
 - (void)drawRect:(NSRect)rect
@@ -94,7 +95,7 @@
     
     
     NSFrameRectWithWidth (rect, 1);
-    [[NSColor blackColor] set];
+    [[NSColor blueColor] set];
     CGContextMoveToPoint(context, 0, zero);
     CGContextAddLineToPoint(context, rect.size.width, zero);
     CGContextStrokePath(context);
@@ -124,6 +125,17 @@
         if ((i==ind) && boldpoint) [self drawPoint:point :YES];
             else [self drawPoint:point :NO];
     }
+    
+    NSDictionary *dict=[[NSDictionary alloc] init];
+    
+    NSPoint botPoint={5,0};
+    NSPoint topPoint={5,[self frame].size.height-bordersShift};
+    
+    NSString *botString=[[NSString alloc] initWithFormat:@"%0.2f",min];
+    NSString *topString=[[NSString alloc] initWithFormat:@"%0.2f",max];
+    
+    [botString drawAtPoint:botPoint withAttributes: dict];
+    [topString drawAtPoint:topPoint withAttributes:dict];
     
 } //drawRect
 
