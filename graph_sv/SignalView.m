@@ -142,8 +142,8 @@
     
     for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]-min)+bordersShift));
-        CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]-min)+bordersShift));
+        if (i==0) CGContextMoveToPoint(context, currX, zero+(shift_y*([vector [i] floatValue])));
+        CGContextAddLineToPoint(context,currX,zero+(shift_y*([vector[i] floatValue])));
 
         currX+=shift_x;
     }
@@ -154,10 +154,11 @@
     NSDictionary *dict=[[NSDictionary alloc] init];
     
     NSPoint maxPoint={5, zero+max*shift_y-bordersShift};
-    NSPoint minPoint={5, bordersShift};
+    NSPoint minPoint={5, zero+min*shift_y};
     
-    NSString *botString=[[NSString alloc] initWithFormat:@"%0.2f",min];
     NSString *topString=[[NSString alloc] initWithFormat:@"%0.2f",max];
+    NSString *botString=[[NSString alloc] initWithFormat:@"%0.2f",min];
+    
     
     [botString drawAtPoint:minPoint withAttributes: dict];
     [topString drawAtPoint:maxPoint withAttributes:dict];
@@ -168,7 +169,7 @@
     for (int i=0; i<[vector count]; i++)
     {
         point.x=shift_x*i+bordersShift+leftPadding;
-        point.y=shift_y*([vector[i] floatValue]-min)+bordersShift;
+        point.y=zero+(shift_y*([vector [i] floatValue]));
 
         currX+=shift_x;
         
