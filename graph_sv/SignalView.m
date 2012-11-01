@@ -26,21 +26,35 @@
         max=0.0f;
         shift_y=0.0f;
         shift_x=0.0f;
-        ind=0;
+        ind=-1;
+        diameter=6.0f;
+        boldpoint=NO;
     }
     return self;
 }
 @synthesize vector;
 
--(void) drawPoint:(NSPoint) currPoint
+-(void) drawPoint:(NSPoint) currPoint :(BOOL) Bold
 {
     CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
-    [[NSColor whiteColor] set];
-    CGRect currRect={currPoint.x-3,currPoint.y-3,6,6};
-
+    
+    if(Bold)
+    {
+        [[NSColor redColor] set];
+        diameter*=1.5;
+    } else
+    {
+        [[NSColor whiteColor] set];
+        diameter=6;
+    }
+    
+    
+    CGRect currRect={currPoint.x-(diameter/2),currPoint.y-(diameter/2),diameter,diameter};
     NSBezierPath *circle=[NSBezierPath bezierPathWithOvalInRect:currRect];
     [circle fill];
     CGContextStrokePath(context);
+    
+    diameter=6;
 }
 
 - (void)recalcBorder:(NSRect)rect
@@ -77,13 +91,14 @@
     NSColor * gray = [NSColor lightGrayColor];
     [gray set];
     NSRectFill(rect);
-    [blue set];
+    
     
     NSFrameRectWithWidth (rect, 1);
-    
-    CGContextMoveToPoint(context, bordersShift, zero);
-    CGContextAddLineToPoint(context, rect.size.width-bordersShift, zero);
-    
+    [[NSColor blackColor] set];
+    CGContextMoveToPoint(context, 0, zero);
+    CGContextAddLineToPoint(context, rect.size.width, zero);
+    CGContextStrokePath(context);
+    [blue set];
     float currX=bordersShift;
     
     for (int i=0; i<[vector count]; i++)
@@ -105,12 +120,17 @@
         point.y=shift_y*([vector[i] floatValue]-min)+bordersShift;
 
         currX+=shift_x;
-        [self drawPoint:point];
+        
+        if ((i==ind) && boldpoint) [self drawPoint:point :YES];
+            else [self drawPoint:point :NO];
     }
     
 } //drawRect
 
-
+- (void) setBoldPoint:(bool) bold
+{
+    boldpoint=bold;
+}
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
