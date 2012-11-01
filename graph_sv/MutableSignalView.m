@@ -31,7 +31,6 @@
 - (void) mouseUp:(NSEvent *)theEvent
 {
     needDrag=NO;
-    [super setBoldPoint:NO];
     [super recalcBorder:[self frame]];
     [self setNeedsDisplay:YES];
     needRecalc=TRUE;
@@ -39,9 +38,7 @@
 
 - (void) mouseDragged:(NSEvent *)theEvent
 {
-    [super setBoldPoint:YES];
-    
-    ind=(([theEvent locationInWindow].x-[self frame].origin.x-bordersShift)/([self frame].size.width-2*bordersShift))* ([super.vector count]-1)+0.5;
+    [self select:theEvent];
     NSNumber* val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]];
     if(needDrag)
     {
@@ -60,16 +57,27 @@
                 }
     } else{}
     
-    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
     [AC setValue:val forKeyPath:@"selection.value"];
     
 }
+- (void)select:(NSEvent *)theEvent
+{
+    ind=(([theEvent locationInWindow].x-[self frame].origin.x-bordersShift)/([self frame].size.width-2*bordersShift))* ([super.vector count]-1)+0.5;
+    if (ind<0)
+    {
+        ind=0;
+    }else
+    if (ind>[[AC arrangedObjects] count]-1){
+        ind=[AC.arrangedObjects count]-1;
+    }
+    [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
+}
+
 -(void) mouseDown:(NSEvent *)theEvent
 {
-    [super setBoldPoint:YES];
     needRecalc=FALSE;
     
-    ind=(([theEvent locationInWindow].x-[self frame].origin.x-bordersShift)/([self frame].size.width-2*bordersShift))* ([super.vector count]-1)+0.5;
+    [self select:theEvent];
     
     float positionX=([self frame].size.width-2*bordersShift)/([super.vector count]-1)*ind;
     float positionY=(shift_y*([super.vector[ind] floatValue]-min)+bordersShift);

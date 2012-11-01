@@ -28,7 +28,6 @@
         shift_x=0.0f;
         ind=-1;
         diameter=6.0f;
-        boldpoint=NO;
     }
     return self;
 }
@@ -70,6 +69,10 @@
     
     shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
     shift_y=(rect.size.height-bordersShift*2)/(max-min);
+    if (shift_y>50)
+    {
+        shift_y=50;
+    }
     
     zero=-min*shift_y+bordersShift;
 }
@@ -114,23 +117,17 @@
     currX=bordersShift;
     NSPoint point;
     
-    for (int i=0; i<[vector count]; i++)
+    for (NSInteger i=0; i<[vector count]; i++)
     {
         point.x=shift_x*i+bordersShift;
         point.y=shift_y*([vector[i] floatValue]-min)+bordersShift;
 
         currX+=shift_x;
-        
-        if ((i==ind) && boldpoint) [self drawPoint:point :YES];
+        if (i==[AC selectionIndex]) [self drawPoint:point :YES];
             else [self drawPoint:point :NO];
     }
     
 } //drawRect
-
-- (void) setBoldPoint:(bool) bold
-{
-    boldpoint=bold;
-}
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -141,6 +138,7 @@
 - (void) bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options
 {
     AC=observable;
+    [AC addObserver:self forKeyPath:@"selection" options:0 context:nil];
     [super bind:binding toObject:observable withKeyPath:keyPath options:options];
     [self recalcBorder:[self frame]];
     [self setNeedsDisplay:YES];

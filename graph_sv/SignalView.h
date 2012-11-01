@@ -17,13 +17,11 @@
     float max;
     float shift_y;
     float shift_x;
-    int ind;
+    NSInteger ind;
     float diameter;
-    bool boldpoint;
     NSArrayController* AC;
 }
 
-- (void) setBoldPoint:(bool) bold;
 - (void) drawRect:(NSRect)rect;
 - (void) drawPoint:(NSPoint)point :(BOOL)Bold;
 - (void) recalcBorder:(NSRect) rect;
