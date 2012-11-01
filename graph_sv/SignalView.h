@@ -12,6 +12,7 @@
 @interface SignalView : NSView
 {
     float bordersShift;
+    float leftPadding;
     float zero;
     float min;
     float max;
@@ -24,6 +25,7 @@
 
 - (void) drawRect:(NSRect)rect;
 - (void) drawPoint:(NSPoint)point :(BOOL)Bold;
+- (void) recalcMinAndMax:(NSRect)rect;
 - (void) recalcBorder:(NSRect) rect;
 @property NSMutableArray* vector;
 

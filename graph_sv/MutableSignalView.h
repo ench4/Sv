@@ -11,8 +11,8 @@
 @interface MutableSignalView : SignalView
 {
     BOOL needRecalc;
-    BOOL needDrag;
+    BOOL canDrag;
 }
 
-
+- (int)setInd:(float)forInd;
 @end

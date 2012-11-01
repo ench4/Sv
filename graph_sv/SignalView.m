@@ -22,6 +22,7 @@
     {
         zero=0;
         bordersShift=15;
+        leftPadding=50;
         min=0.0f;
         max=0.0f;
         shift_y=0.0f;
@@ -56,25 +57,49 @@
     diameter=6;
 }
 
+- (void) recalcMinAndMax:(NSRect)rect
+{
+
+        max=[vector[0] floatValue];
+        min=[vector[0] floatValue];
+        for (int i=1; i<[vector count]; i++)
+        {
+            if (max < [[vector objectAtIndex:i] floatValue])
+            {
+                max=[[vector objectAtIndex:i] floatValue];
+            }
+            if (min > [[vector objectAtIndex:i] floatValue])
+            {
+                min=[[vector objectAtIndex:i] floatValue];
+            }
+        }
+}
+
 - (void)recalcBorder:(NSRect)rect
 {
-    max=[vector[0] floatValue];
-    min=[vector[0] floatValue];
-    for (int i=1; i<[vector count]; i++)
-    {
-        if (max < [[vector objectAtIndex:i] floatValue]) max=[[vector objectAtIndex:i] floatValue];
-        if (min > [[vector objectAtIndex:i] floatValue])
-            min=[[vector objectAtIndex:i] floatValue];
-    }
+
+    [self recalcMinAndMax:rect];
     
-    shift_x=(rect.size.width-bordersShift*2)/([vector count]-1);
-    shift_y=(rect.size.height-bordersShift*2)/(max-min);
-    if (shift_y>50)
+    if (max!=min)
     {
-        shift_y=50;
+        shift_y=(rect.size.height-bordersShift*2)/(max-min);
+        zero=-min*shift_y+bordersShift;
     }
+        else
+            if(max>=1)
+            {
+                shift_y=(rect.size.height-bordersShift*2)/max;
+                zero=shift_y/(-min)+bordersShift;
+            }
+                else
+                {
+                    shift_y=(rect.size.height-bordersShift*2)*max;
+                    zero=shift_y/(-min)+bordersShift;
+                }
     
     zero=-min*shift_y+bordersShift;
+    shift_x=(rect.size.width-bordersShift*2-leftPadding)/([vector count]-1);
+    
 }
 
 - (void)drawRect:(NSRect)rect
@@ -95,26 +120,42 @@
     [gray set];
     NSRectFill(rect);
     
-    
     NSFrameRectWithWidth (rect, 1);
+    
+    CGContextSetLineWidth(context, 0.5f);
     [[NSColor blackColor] set];
-    CGContextMoveToPoint(context, 0, zero);
+    
+    CGContextMoveToPoint(context, bordersShift+leftPadding-10, zero);
     CGContextAddLineToPoint(context, rect.size.width, zero);
     CGContextStrokePath(context);
+    CGContextSetLineWidth(context, 2.0f);
     [blue set];
-    float currX=bordersShift;
+    
+    float currX=bordersShift+leftPadding;
     
     for (int i=0; i<[vector count]; i++)
     {
-        if (i==0) CGContextMoveToPoint(context, currX, (shift_y*([vector [i] floatValue]-min)+bordersShift));
-        CGContextAddLineToPoint(context,currX,(shift_y*([vector[i] floatValue]-min)+bordersShift));
+        if (i==0) CGContextMoveToPoint(context, currX, zero+(shift_y*([vector [i] floatValue])));
+        CGContextAddLineToPoint(context,currX,zero+(shift_y*([vector[i] floatValue])));
 
         currX+=shift_x;
     }
     
     CGContextStrokePath(context);
     
-    currX=bordersShift;
+
+    
+    NSPoint maxPoint={5, zero+max*shift_y-bordersShift};
+    NSPoint minPoint={5, zero+min*shift_y};
+    
+    NSString *topString=[[NSString alloc] initWithFormat:@"%0.2f",max];
+    NSString *botString=[[NSString alloc] initWithFormat:@"%0.2f",min];
+    
+    
+    [botString drawAtPoint:minPoint withAttributes: nil];
+    [topString drawAtPoint:maxPoint withAttributes:nil];
+    
+    currX=bordersShift+leftPadding;
     NSPoint point;
     
     for (NSInteger i=0; i<[vector count]; i++)

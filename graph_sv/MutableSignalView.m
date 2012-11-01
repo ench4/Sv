@@ -15,7 +15,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         needRecalc=TRUE;
-        needDrag=NO;
+        canDrag=NO;
+       
     }
     
     return self;
@@ -28,9 +29,10 @@
     }
     [super drawRect:dirtyRect];
 }
+
 - (void) mouseUp:(NSEvent *)theEvent
 {
-    needDrag=NO;
+    canDrag=NO;
     [super recalcBorder:[self frame]];
     [self setNeedsDisplay:YES];
     needRecalc=TRUE;
@@ -40,7 +42,7 @@
 {
     [self select:theEvent];
     NSNumber* val=[NSNumber numberWithFloat:[AC.arrangedObjects[ind] floatValue]];
-    if(needDrag)
+    if(canDrag)
     {
         if ([self frame].origin.y+bordersShift>[theEvent locationInWindow].y)
         {
@@ -55,7 +57,7 @@
                 {
                     val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - [self frame].origin.y - zero)/shift_y)];
                 }
-    } else{}
+    }
     
     [AC setValue:val forKeyPath:@"selection.value"];
     
@@ -79,13 +81,13 @@
     
     [self select:theEvent];
     
-    float positionX=([self frame].size.width-2*bordersShift)/([super.vector count]-1)*ind;
+    float positionX=([self frame].size.width-2*bordersShift-leftPadding)/([super.vector count]-1)*ind;
     float positionY=(shift_y*([super.vector[ind] floatValue]-min)+bordersShift);
     
-    if (fabs(positionX-([theEvent locationInWindow].x-[self frame].origin.x-bordersShift))<(diameter/2)
-        && fabs(positionY-([theEvent locationInWindow].y-[self frame].origin.y))<(diameter/2))
+    if (fabs(positionX-([theEvent locationInWindow].x-[self frame].origin.x-bordersShift-leftPadding))<(diameter)
+        && fabs(positionY-([theEvent locationInWindow].y-[self frame].origin.y))<(diameter))
             {
-                needDrag=YES;
+                canDrag=YES;
             }
     
     [AC setSelectionIndexes:[[NSIndexSet alloc] initWithIndex:ind]];
