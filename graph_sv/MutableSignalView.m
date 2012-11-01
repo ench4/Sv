@@ -56,6 +56,7 @@
             }else
                 {
                     val=[NSNumber numberWithFloat:(([theEvent locationInWindow].y - [self frame].origin.y - zero)/shift_y)];
+                    [super recalcMinAndMax:[self frame]];
                 }
     }
     
@@ -64,7 +65,7 @@
 }
 - (void)select:(NSEvent *)theEvent
 {
-    ind=(([theEvent locationInWindow].x-[self frame].origin.x-bordersShift)/([self frame].size.width-2*bordersShift))* ([super.vector count]-1)+0.5;
+    ind=(([theEvent locationInWindow].x-[self frame].origin.x-bordersShift-leftPadding)/([self frame].size.width-2*bordersShift-leftPadding))* ([super.vector count]-1)+0.5;
     if (ind<0)
     {
         ind=0;

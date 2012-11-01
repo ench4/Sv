@@ -127,6 +127,10 @@
     
     CGContextMoveToPoint(context, bordersShift+leftPadding-10, zero);
     CGContextAddLineToPoint(context, rect.size.width, zero);
+    
+    CGContextMoveToPoint(context, bordersShift+leftPadding-10, 0);
+    CGContextAddLineToPoint(context, bordersShift+leftPadding-10, rect.size.height);
+    
     CGContextStrokePath(context);
     CGContextSetLineWidth(context, 2.0f);
     [blue set];
@@ -160,8 +164,8 @@
     
     for (NSInteger i=0; i<[vector count]; i++)
     {
-        point.x=shift_x*i+bordersShift;
-        point.y=shift_y*([vector[i] floatValue]-min)+bordersShift;
+        point.x=shift_x*i+bordersShift+leftPadding;
+        point.y=zero+(shift_y*([vector [i] floatValue]));
 
         currX+=shift_x;
         if (i==[AC selectionIndex]) [self drawPoint:point :YES];
